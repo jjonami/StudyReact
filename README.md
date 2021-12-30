@@ -1,5 +1,9 @@
 # React Study
 ## NOTE
+#### 1. React.Component
+- props를 input으로 하고 UI가 어떻게 보여야 하는지 정의하는 React Element를 output으로 하는 함수
+- 합성을 이용하여 “UI를 재사용할 수 있고 독립적인 단위로 쪼개어 생각”할 수 있게 한다
+- props
 
 
 # Getting Started with Create React App
