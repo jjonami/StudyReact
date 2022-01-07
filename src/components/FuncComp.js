@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Util from "../utils/util";
 
 function FuncComp(props){
@@ -12,7 +12,18 @@ function FuncComp(props){
     // ===> 축약형
     let [date, setDate] = useState((new Date()).toString());
 
-    Util.showLog('func', Util.logStyleG)
+    Util.showLog('func ==> render', Util.logStyleG)
+
+    //side effect > 여러개 설치가능
+    useEffect(function (){
+        //class : componentDidMount() & componentDidUpdate()
+        Util.showLog('func ==> useEffect', Util.logStyleG)
+
+        //clean up > class : componentDidMount()
+        return function cleanup(){
+            Util.showLog('func ==> useEffect return', Util.logStyleG)
+        }
+    });
 
     return(
         <div className='container'>

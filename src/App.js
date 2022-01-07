@@ -83,7 +83,7 @@ class App extends Component {
 
     getPage1(){
         //리액트 기본
-        return <div>
+        return <div className='container'>
             <Subject
                 title={this.state.subject.title}
                 sub={this.state.subject.sub}
@@ -129,7 +129,7 @@ class App extends Component {
 
     getPage2(){
         //class vs hook
-        return <div>
+        return <div className='container'>
             <FuncComp initNum={2}/>
             <ClassComp initNum={2}/>
         </div>

@@ -12,6 +12,11 @@ class ClassComp extends Component{
     componentDidMount(){
         Util.showLog('class ==> componentDidMount', Util.logStyleY)
     }
+
+    componentDidUpdate(){
+        Util.showLog('class ==> componentDidUpdate', Util.logStyleY)
+    }
+
     render(){
         Util.showLog('class ==> render', Util.logStyleY)
 
