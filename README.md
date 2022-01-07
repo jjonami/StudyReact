@@ -1,17 +1,25 @@
 # React Study
 ## NOTE
-#### 1. React.Component
+
+> React.Component
 - [props]를 [input]으로 하고 UI가 어떻게 보여야 하는지 정의하는 [React Element]를 [output]으로 하는 함수
 - 합성을 이용하여 “UI를 재사용할 수 있고 독립적인 단위로 쪼개어 생각”할 수 있게 한다
 
-#### 2. Props / State
+> Props / State
 - props : 부모 컴포넌트가 자식 컴포넌트에 값을 전달할 때 사용 (읽기 전용)
 - state : 컴포넌트 자기 자신이 갖고 있는 값. 변화가 필요할 경웅 [setState()]를 통해 변경
-- 
+
+> Array push() vs. concat()
+- push : 원본 데이터에 아이템을 추가 > 원본 데이터가 변한다
+- concat : 새로운 복제본을 만들어서 아이템을 추가하여 리턴한다
+- setState > 새로운 데이터를 추가하는 것을 사용(성능 개선할 때 좋고 편하다)
+- react >  immutable > 원본을 바꾸지 않는다
+
+> shouldComponentUpdate(newProps, newState)
 
 
+***
 
-------
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
