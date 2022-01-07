@@ -6,12 +6,15 @@ import Subject from "./components/Subject";
 import Control from './components/Control';
 import CreateContent from "./components/CreateContent";
 import UpdateContent from "./components/UpdateContent";
+import FuncComp from "./components/FuncComp";
+import ClassComp from "./components/ClassComp";
 
 class App extends Component {
     //[render()] 보다 먼저 호출 > 어떤 값들을 초기화 하고싶을 경우 [constructor()] 내부에 작성
     constructor(props) {
         super(props);
         this.state = {
+            page: 1,
             mode: 'welcome',
             selected_id: 0,
             welcome: {title: 'Welcome', desc: 'Hello'},
@@ -71,50 +74,70 @@ class App extends Component {
         return _article;
     }
 
+    getPage(){
+        switch (this.state.page){
+            case 0: return this.getPage1();
+            case 1: return this.getPage2();
+        }
+    }
+
+    getPage1(){
+        //리액트 기본
+        return <div>
+            <Subject
+                title={this.state.subject.title}
+                sub={this.state.subject.sub}
+                onChangePage={function(){
+                    this.setState({mode: 'welcome'});
+                }.bind(this)}
+            />
+            <TOC onChangePage={function(id){
+                this.setState({
+                    mode: 'read',
+                    selected_id: id
+                });
+            }.bind(this)}
+                 data={this.state.contents}
+            />
+            <Control
+                onChangeMode={function(_mode){
+                    if(_mode === 'delete'){
+                        if(window.confirm('삭제하시겠습니까?')){
+                            const _contents = Array.from(this.state.contents);
+                            let i = 0;
+                            while(i < _contents.length) {
+                                if(_contents[i].id === parseInt(this.state.selected_id))  {
+                                    _contents.splice(i,1);
+                                    break;
+                                }
+                                i = i + 1;
+                            }
+                            this.setState({
+                                mode: 'welcome',
+                                contents: _contents
+                            });
+                            alert('삭제완료');
+                        }
+                    }else{
+                        this.setState({mode: _mode});
+                    }
+                }.bind(this)}
+            />
+            {this.getContent()}
+        </div>
+    }
+
+    getPage2(){
+        //class vs hook
+        return <div>
+            <FuncComp initNum={2}/>
+            <ClassComp initNum={2}/>
+        </div>
+    }
+
     render(){
         return (
-            <div className="App">
-                <Subject
-                    title={this.state.subject.title}
-                    sub={this.state.subject.sub}
-                    onChangePage={function(){
-                        this.setState({mode: 'welcome'});
-                    }.bind(this)}
-                />
-                <TOC onChangePage={function(id){
-                    this.setState({
-                        mode: 'read',
-                        selected_id: id
-                    });
-                }.bind(this)} 
-                    data={this.state.contents}
-                />
-                <Control 
-                    onChangeMode={function(_mode){
-                        if(_mode === 'delete'){
-                            if(window.confirm('삭제하시겠습니까?')){
-                                const _contents = Array.from(this.state.contents);
-                                let i = 0;
-                                while(i < _contents.length) {
-                                    if(_contents[i].id === parseInt(this.state.selected_id))  {
-                                        _contents.splice(i,1);
-                                        break;
-                                    }
-                                    i = i + 1;
-                                }
-                                this.setState({
-                                    mode: 'welcome',
-                                    contents: _contents
-                                });
-                                alert('삭제완료');
-                            }
-                        }else{
-                            this.setState({mode: _mode});
-                        }
-                    }.bind(this)}
-                />
-                {this.getContent()}
-            </div>
+            <div className="App">{this.getPage()}</div>
         )
     }
 }

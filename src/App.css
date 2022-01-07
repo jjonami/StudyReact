@@ -36,3 +36,18 @@
     transform: rotate(360deg);
   }
 }
+
+.container{
+  border : 2px solid green;
+  margin: 5px;
+  padding: 5px;
+}
+
+.btnPrimary{
+  border: none;
+  margin: 2px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: green;
+  color: white;
+}
