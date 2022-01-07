@@ -17,15 +17,15 @@ class App extends Component {
             welcome: {title: 'Welcome', desc: 'Hello'},
             subject: {title: 'My Books', sub: 'I\'m Ready!' },
             contents: [
-                {id: 0, title: '정의란 무엇인가', desc: '마이클 샌델'},
-                {id: 1, title: '코스모스', desc: '칼 세이건 '},
-                {id: 2, title: '넛지', desc: '리처드 탈러, 캐스 선스타인'},
+                {id: 1, title: '정의란 무엇인가', desc: '마이클 샌델'},
+                {id: 2, title: '코스모스', desc: '칼 세이건 '},
+                {id: 3, title: '넛지', desc: '리처드 탈러, 캐스 선스타인'},
             ]
         }
     }
 
     getSelectedItem(){
-        return this.state.contents[parseInt(this.state.selected_id)];
+        return this.state.contents[parseInt(this.state.selected_id)-1];
     }
 
     getContent(){
@@ -44,12 +44,12 @@ class App extends Component {
                 break
             case 'create':
                 _article = <CreateContent onSubmit={function (_title, _desc){
-                    const newItem = {id: this.state.contents.length, title: _title, desc: _desc};
+                    const newItem = {id: this.state.contents.length+1, title: _title, desc: _desc};
                     const _contents = this.state.contents.concat(newItem);
                     this.setState({
                         contents: _contents,
                         mode: 'read',
-                        selected_id: String(newItem.id)
+                        selected_id: newItem.id
                     })
                 }.bind(this)}/>
                 break
@@ -84,14 +84,33 @@ class App extends Component {
                 <TOC onChangePage={function(id){
                     this.setState({
                         mode: 'read',
-                        seleted_id: id
+                        selected_id: id
                     });
                 }.bind(this)} 
                     data={this.state.contents}
                 />
                 <Control 
                     onChangeMode={function(_mode){
-                        this.setState({mode: _mode});
+                        if(_mode === 'delete'){
+                            if(window.confirm('삭제하시겠습니까?')){
+                                const _contents = Array.from(this.state.contents);
+                                let i = 0;
+                                while(i < _contents.length) {
+                                    if(_contents[i].id === parseInt(this.state.selected_id))  {
+                                        _contents.splice(i,1);
+                                        break;
+                                    }
+                                    i = i + 1;
+                                }
+                                this.setState({
+                                    mode: 'welcome',
+                                    contents: _contents
+                                });
+                                alert('삭제완료');
+                            }
+                        }else{
+                            this.setState({mode: _mode});
+                        }
                     }.bind(this)}
                 />
                 {this.getContent()}
