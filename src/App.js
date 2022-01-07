@@ -5,6 +5,7 @@ import ReadContent from "./components/ReadContent";
 import Subject from "./components/Subject";
 import Control from './components/Control';
 import CreateContent from "./components/CreateContent";
+import UpdateContent from "./components/UpdateContent";
 
 class App extends Component {
     //[render()] 보다 먼저 호출 > 어떤 값들을 초기화 하고싶을 경우 [constructor()] 내부에 작성
@@ -12,7 +13,7 @@ class App extends Component {
         super(props);
         this.state = {
             mode: 'welcome',
-            seleted_id: 0,
+            selected_id: 0,
             welcome: {title: 'Welcome', desc: 'Hello'},
             subject: {title: 'My Books', sub: 'I\'m Ready!' },
             contents: [
@@ -22,8 +23,14 @@ class App extends Component {
             ]
         }
     }
-    render(){
-        let _title, _desc, _article = null;
+
+    getSelectedItem(){
+        return this.state.contents[parseInt(this.state.selected_id)];
+    }
+
+    getContent(){
+        let _title, _desc, _article, _data = null;
+
         // eslint-disable-next-line default-case
         switch (this.state.mode){
             case 'welcome':
@@ -32,19 +39,39 @@ class App extends Component {
                 _article = <ReadContent title={_title} desc={_desc}/>
                 break
             case 'read':
-                _title = this.state.contents[this.state.seleted_id].title;
-                _desc = this.state.contents[this.state.seleted_id].desc;
-                _article = <ReadContent title={_title} desc={_desc}/>
+                _data = this.getSelectedItem();
+                _article = <ReadContent title={_data.title} desc={_data.desc}/>
                 break
             case 'create':
                 _article = <CreateContent onSubmit={function (_title, _desc){
                     const newItem = {id: this.state.contents.length, title: _title, desc: _desc};
                     const _contents = this.state.contents.concat(newItem);
-                    this.setState({contents: _contents})
+                    this.setState({
+                        contents: _contents,
+                        mode: 'read',
+                        selected_id: String(newItem.id)
+                    })
+                }.bind(this)}/>
+                break
+            case 'update':
+                _data = this.getSelectedItem();
+                _article = <UpdateContent data = {_data}
+                    onSubmit={function (_id, _title, _desc){
+                        const _contents = Array.from(this.state.contents); //배열 복사
+                        let find = _contents.find(v => v.id === _id);
+                        find.title = _title
+                        find.desc = _desc
+                        this.setState({
+                            contents: _contents,
+                            mode: 'read'
+                        })
                 }.bind(this)}/>
                 break
         }
+        return _article;
+    }
 
+    render(){
         return (
             <div className="App">
                 <Subject
@@ -67,7 +94,7 @@ class App extends Component {
                         this.setState({mode: _mode});
                     }.bind(this)}
                 />
-                {_article}
+                {this.getContent()}
             </div>
         )
     }
