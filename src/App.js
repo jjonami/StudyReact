@@ -137,7 +137,21 @@ class App extends Component {
 
     render(){
         return (
-            <div className="App">{this.getPage()}</div>
+            <div className="App">
+                <div className='page'>
+                    <button className='btnAccent' onClick={function (){
+                        this.setState({
+                            page: 0
+                        })
+                    }.bind(this)}>page1</button>
+                    <button className='btnAccent' onClick={function (){
+                        this.setState({
+                            page: 1
+                        })
+                    }.bind(this)}>page2</button>
+                </div>
+                {this.getPage()}
+            </div>
         )
     }
 }

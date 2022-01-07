@@ -7,18 +7,22 @@ class ClassComp extends Component{
         date: (new Date()).toString()
     }
     componentWillMount(){
-        Util.showLog('class ==> componentWillMount', Util.logStyleY)
+        Util.showLog('class ==> componentWillMount', Util.logStyleWarn)
     }
     componentDidMount(){
-        Util.showLog('class ==> componentDidMount', Util.logStyleY)
+        Util.showLog('class ==> componentDidMount', Util.logStyleWarn)
+    }
+
+    componentWillUnmount(){
+        Util.showLog('class ==> componentWillUnmount', Util.logStyleWarn)
     }
 
     componentDidUpdate(){
-        Util.showLog('class ==> componentDidUpdate', Util.logStyleY)
+        Util.showLog('class ==> componentDidUpdate', Util.logStyleWarn)
     }
 
     render(){
-        Util.showLog('class ==> render', Util.logStyleY)
+        Util.showLog('class ==> render', Util.logStyleWarn)
 
         return(
             <div className='container'>

@@ -3,9 +3,10 @@ import {Component} from "react/cjs/react.production.min";
 
 
 class Util extends Component {
-    static logStyleY = 'color:yellow';
-    static logStyleR = 'color:red';
-    static logStyleG = 'color:green';
+    static logStyleErr      = 'color:red';
+    static logStyleWarn     = 'color:yellow';
+    static logStyleInfo     = 'color:blue';
+    static logStyleSuccess  = 'color:green';
 
     static showLog(msg, style) {
         console.log('%c %s', style, msg);
