@@ -5,7 +5,7 @@ class Subject extends Component{
         return(
             <header>
                 <h1>
-                    <a href='/' 
+                    <a  href='/'
                         onClick={function(e){
                             e.preventDefault();
                             this.props.onChangePage();

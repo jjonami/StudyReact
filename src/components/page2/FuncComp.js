@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import Util from "../utils/util";
+import Util from "../../utils/util";
 
 function FuncComp(props){
     let numberState = useState(props.initNum);

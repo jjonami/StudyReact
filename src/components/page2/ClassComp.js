@@ -1,5 +1,5 @@
 import {Component} from "react/cjs/react.production.min";
-import Util from "../utils/util";
+import Util from "../../utils/util";
 
 class ClassComp extends Component{
     state = {
