@@ -15,8 +15,24 @@
 - setState > 새로운 데이터를 추가하는 것을 사용(성능 개선할 때 좋고 편하다)
 - react >  immutable > 원본을 바꾸지 않는다
 
-> shouldComponentUpdate(newProps, newState)
+> Redux 기본 원칙
+- Single Source of Truth > 하나의 애플리케이션 안에는 하나의 스토어만 사용하자
+- State is read-only > 상태를 변화시키는 방법은 오직 액션을 일으키는 것
+- Changes are made with pure functions > 변화를 일으키는 리듀서 함수는 순수한 함수
+  - [순수함수]
+    1. 리듀서 함수는 이전 상태와 액션 객체를 파라미터로 받는다.
+    2. 파라미터 외의 값에는 의존하면 안된다.
+    3. 이전 상태는 절대로 건드리지 않고, 변화를 준 새로운 상태 객체를 만들어서 반환한다.
+    4. 똑같은 파라미터로 호출된 리듀서 함수는 언제나 똑같은 결과 값을 반환해야 한다.
 
+> Redux
+- store > 상태가 관리되는 오직 하나의 공간
+- action > 앱에서 스토어에 운반할 데이터 (주문서) / 자바스크립트 객체 형식
+- reducer > [Action]을 [Reducer]에 전달 > [Reducer]가 주문을 보고 [Store]의 상태를 업데이트 
+- [Action]을 [Reduce]에 전달하기 위해서는 dispatch() 메소드를 사용
+
+>  
+ 
 
 ***
 
