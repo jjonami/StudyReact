@@ -1,10 +1,10 @@
 import {Component} from "react/cjs/react.production.min";
 import Subject from "./Subject";
-import TOC from "./TOC";
 import Control from "./Control";
 import ReadContent from "./ReadContent";
 import CreateContent from "./CreateContent";
 import UpdateContent from "./UpdateContent";
+import TOC from "../TOC";
 
 class Home1 extends Component{
     constructor(props) {

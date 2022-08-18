@@ -3,7 +3,7 @@ import './App.css';
 import Home1 from "./components/page1/Home1";
 import Home2 from "./components/page2/Home2";
 import Home3 from "./components/page3/Home3";
-import Home4 from "./components/page4/Home4";
+import VideoPlayer from "./components/page5/VideoPlayer";
 
 class App extends Component {
     //[render()] 보다 먼저 호출 > 어떤 값들을 초기화 하고싶을 경우 [constructor()] 내부에 작성
@@ -19,7 +19,7 @@ class App extends Component {
             case 0: return <Home1 />;
             case 1: return <Home2 />;
             case 2: return <Home3 />;
-            case 3: return <Home4 />;
+            case 3: return <VideoPlayer />;
         }
     }
 
@@ -44,9 +44,9 @@ class App extends Component {
                     }.bind(this)}>page3</button>
                     <button className='btnAccent' onClick={function (){
                         this.setState({
-                            page: 3
+                            page: 4
                         })
-                    }.bind(this)}>page4</button>
+                    }.bind(this)}>video</button>
                 </div>
                 {this.getPage()}
             </div>
